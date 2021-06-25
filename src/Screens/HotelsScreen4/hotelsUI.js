@@ -14,9 +14,7 @@ export default function hotelsUI(props) {
             const AuthStr = 'Bearer '.concat(props.accessToken);
             const axios = require('axios');
             console.log(lat + " " + lon);
-            const lat2 = Number(13.383);
-
-            const URL = `https://test.api.amadeus.com/v2/shopping/hotel-offers?roomQuantity=1&cityCode=${city}&adults=2&radius=5&radiusUnit=KM&paymentPolicy=NONE&includeClosed=false&bestRateOnly=true&view=FULL&sort=NONE`;
+            const URL = `https://test.api.amadeus.com/v2/shopping/hotel-offers?roomQuantity=1&latitude=${lat}&longitude=${lon}&adults=2&radius=5&radiusUnit=KM&paymentPolicy=NONE&includeClosed=false&bestRateOnly=true&view=FULL&sort=NONE`;
             var string_copy = (' ' + URL).slice(1);  
             axios
               .get(string_copy, {headers: {Authorization: AuthStr}})
@@ -39,14 +37,9 @@ export default function hotelsUI(props) {
               .get(URL1)
               .then(function (response) {
                 lat = 
-                  Math.round((response.data.bbox[1] + response.data.bbox[3]) / 2 * 10000) / 10000;
-                lon = 
-                  Math.round(
-                    ((response.data.bbox[0] + response.data.bbox[2]) / 2) *
-                      10000,
-                  ) / 10000
-                ;
-                // console.log(lat + " " + lon)
+                 (response.data.bbox[1]);
+                lon = ((response.data.bbox[0]));
+                console.log(lat + " " + lon)
               })
               .catch(function (error) {
                 console.log(error);

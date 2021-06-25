@@ -18,6 +18,13 @@ export default function RouteHome() {
   const [startAddress, onChangeText1] = useState(null);
   const [endAddress, onChangeText2] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
+  const [handlePress, startHandlePress] = useState(false);
+  handlePressFunction = () => {
+    startHandlePress(true);
+    setTimeout(() => {
+      setModalVisible(true);
+    }, 6000 )
+  }
   return (
     <View
       style={[
@@ -33,6 +40,7 @@ export default function RouteHome() {
         close={setModalVisible}
         startAddress={startAddress}
         endAddress={endAddress}
+        startRequest={handlePress}
       />
       <Header title={'Routing'}></Header>
       <Input
@@ -45,7 +53,7 @@ export default function RouteHome() {
         placeholder={'End Address'}
         iconName={'locate-outline'}
       />
-      <StyledButton loading={false} title={'Go'} submitForm={setModalVisible} />
+      <StyledButton loading={false} title={'Go'} submitForm={handlePressFunction} />
     </View>
   );
 }
