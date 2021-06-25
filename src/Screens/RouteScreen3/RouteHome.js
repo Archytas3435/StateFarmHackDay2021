@@ -13,18 +13,22 @@ import Input from '../../CommonComponents/input';
 import fullLengthButton from '../../CommonComponents/fullLengthButton';
 import StyledButton from '../../CommonComponents/styledButton';
 import Modal from './modalMap';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export default function RouteHome() {
   const [startAddress, onChangeText1] = useState(null);
   const [endAddress, onChangeText2] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [handlePress, startHandlePress] = useState(false);
+  const[loading, setLoading] = useState(false)
   handlePressFunction = () => {
+    setLoading(true)
     startHandlePress(true);
     setTimeout(() => {
       setModalVisible(true);
-    }, 6000 )
-  }
+      setLoading(false)
+    }, 6000);
+  };
   return (
     <View
       style={[
@@ -53,7 +57,12 @@ export default function RouteHome() {
         placeholder={'End Address'}
         iconName={'locate-outline'}
       />
-      <StyledButton loading={false} title={'Go'} submitForm={handlePressFunction} />
+      <StyledButton
+        loading={false}
+        title={'Go'}
+        submitForm={handlePressFunction}
+        loading={loading}
+      />
     </View>
   );
 }

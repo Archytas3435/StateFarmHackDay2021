@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 export default function listHotels(props) {
     const { hotelsList } = props.route.params;
-    console.log(hotelsList)
+    // console.log(hotelsList)
     handleHotelList = () => {
         for(let i = 0; i < hotelsList.length;i++) {
             console.log(hotelsList[i].hotel.contact)
@@ -16,7 +16,13 @@ export default function listHotels(props) {
     renderHotelsList = () => {
         return hotelsList.map((element) => {
             return (
-              <TouchableOpacity style={styles.box} key={element.hotel.name}>
+              <TouchableOpacity style={styles.box} key={element.hotel.name}
+              onPress={() => {
+                  props.nav.navigate('Info', {
+                    element: element.hotel,
+                  });
+              }}
+              >
                 <View style={styles.topRow}>
                   <Text style={styles.hotelName}>
                     {element.hotel.name.toUpperCase()}
@@ -71,7 +77,7 @@ export default function listHotels(props) {
                         fontFamily: 'KohinoorDevanagari-Regular',
                       },
                     ]}>
-                    {element.hotel.contact.phone}
+                    {element.hotel.contact != undefined ? element.hotel.contact.phone : ''}
                   </Text>
                 </View>
                 <View style={styles.ratingRow}>

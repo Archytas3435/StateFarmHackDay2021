@@ -15,6 +15,9 @@ export default function inputBox(props) {
         autoCompleteType={props.autoCompleteType}
         secureTextEntry={props.password}
         keyboardType={props.keyboardType}
+        clearTextOnFocus={true}
+        returnKeyType={props.returnKey}
+        onSubmitEditing={props.onEndEditing}
       />
     </View>
   );

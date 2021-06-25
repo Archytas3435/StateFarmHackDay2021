@@ -8,23 +8,30 @@ export default function hotelsUI(props) {
     const[guests, setGuests] = useState(null);
     const [distance, setDistance] = useState(null);
     const[address, setAddress] = useState(null);
+    const[loading, setLoading] = useState(false);
     let lat;
     let lon;
           getRequest = (city) => {
             const AuthStr = 'Bearer '.concat(props.accessToken);
             const axios = require('axios');
             console.log(lat + " " + lon);
-            // const URL = 
-            // `https://test.api.amadeus.com/v2/shopping/hotel-offers?roomQuantity=${roomQuantity}&cityCode=${address}&adults=${guests}&radius=${distance}&radiusUnit=MILE&paymentPolicy=NONE&includeClosed=false&bestRateOnly=true&view=FULL&sort=NONE`;
-            const URL = `https://test.api.amadeus.com/v2/shopping/hotel-offers?roomQuantity=1&cityCode=DFW&adults=1&radius=5&radiusUnit=MILE&paymentPolicy=NONE&includeClosed=false&bestRateOnly=true&view=FULL&sort=NONE`;
+            const URL = 
+            `https://test.api.amadeus.com/v2/shopping/hotel-offers?roomQuantity=${roomQuantity}&cityCode=${address}&adults=${guests}&radius=${distance}&radiusUnit=MILE&paymentPolicy=NONE&includeClosed=false&bestRateOnly=true&view=FULL&sort=NONE`;
+            // const URL = `https://test.api.amadeus.com/v2/shopping/hotel-offers?roomQuantity=1&cityCode=DFW&adults=1&radius=5&radiusUnit=MILE&paymentPolicy=NONE&includeClosed=false&bestRateOnly=true&view=FULL&sort=NONE`;
             var string_copy = (' ' + URL).slice(1);  
             axios
               .get(string_copy, {headers: {Authorization: AuthStr}})
               .then(response => {
                 console.log(response.data.data);
+                setLoading(false)
+                setRoomQuantity('');
+                setGuests('')
+                setAddress('')
+                setDistance('')
                 props.nav.navigate('List', {
                   hotelsList: response.data.data,
                 });
+
               })
               .catch(error => {
                 console.log('error Amadeus' + error);
@@ -53,6 +60,7 @@ export default function hotelsUI(props) {
               });
           };
     handleRequest = () => {
+      setLoading(true)
         get_lat_lon('Berlin Germany')
         getRequest("DFW")
     }
@@ -85,6 +93,7 @@ export default function hotelsUI(props) {
           loading={false}
           title={'Search'}
           submitForm={handleRequest}
+          loading={loading}
         />
       </View>
     );

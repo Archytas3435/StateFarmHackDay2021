@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   titleText: {
-    // fontFamily: 'Nexa Bold',
+    fontFamily: 'KohinoorTelugu-Regular',
     color: 'white',
     fontSize: 25,
     // marginTop: 3,

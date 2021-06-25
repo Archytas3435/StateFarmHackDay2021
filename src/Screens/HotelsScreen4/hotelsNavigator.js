@@ -5,6 +5,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {useNavigation} from '@react-navigation/native';
 import HotelsHome from './HotelsHome';
 import HotelsList from './listHotels';
+import Individual from './individualHotel';
 
 const Home = ({route}) => {
   const navigation = useNavigation();
@@ -16,11 +17,10 @@ const List = ({route}) => {
   return <HotelsList nav={navigation} route={route} />;
 };
 
-// const Home = () => {
-//   const navigation = useNavigation();
-
-//   return <MCQ nav={navigation} />;
-// };
+const Info = ({route}) => {
+  const navigation = useNavigation();
+  return <Individual nav={navigation} route={route} />;
+};
 
 const Stack = createStackNavigator();
 
@@ -33,6 +33,7 @@ export default function App() {
       initialRouteName={'Home'}>
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="List" component={List} />
+      <Stack.Screen name="Info" component={Info} />
     </Stack.Navigator>
   );
 }
