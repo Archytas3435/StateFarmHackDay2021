@@ -14,12 +14,17 @@ export default function hotelsUI(props) {
             const AuthStr = 'Bearer '.concat(props.accessToken);
             const axios = require('axios');
             console.log(lat + " " + lon);
-            const URL = `https://test.api.amadeus.com/v2/shopping/hotel-offers?roomQuantity=1&latitude=${lat}&longitude=${lon}&adults=2&radius=5&radiusUnit=KM&paymentPolicy=NONE&includeClosed=false&bestRateOnly=true&view=FULL&sort=NONE`;
+            // const URL = 
+            // `https://test.api.amadeus.com/v2/shopping/hotel-offers?roomQuantity=${roomQuantity}&cityCode=${address}&adults=${guests}&radius=${distance}&radiusUnit=MILE&paymentPolicy=NONE&includeClosed=false&bestRateOnly=true&view=FULL&sort=NONE`;
+            const URL = `https://test.api.amadeus.com/v2/shopping/hotel-offers?roomQuantity=1&cityCode=DFW&adults=1&radius=5&radiusUnit=MILE&paymentPolicy=NONE&includeClosed=false&bestRateOnly=true&view=FULL&sort=NONE`;
             var string_copy = (' ' + URL).slice(1);  
             axios
               .get(string_copy, {headers: {Authorization: AuthStr}})
               .then(response => {
                 console.log(response.data.data);
+                props.nav.navigate('List', {
+                  hotelsList: response.data.data,
+                });
               })
               .catch(error => {
                 console.log('error Amadeus' + error);
@@ -57,10 +62,9 @@ export default function hotelsUI(props) {
           setInput={setAddress}
           placeholder={'Airport Code (Ex: DFW)'}
           iconName={'location-outline'}
-          keyboardType={'number-pad'}
         />
         <Input
-          setInput={setRoomQuantity}
+          setInput={setRoomQuantity}DFW
           placeholder={'Number of Rooms (1-9)'}
           iconName={'wallet-outline'}
           keyboardType={'number-pad'}

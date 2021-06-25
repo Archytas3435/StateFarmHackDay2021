@@ -7,7 +7,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
 import Home from '../home';
 import Packing from '../Screens/PackingScreen1/PackingHome';
-import Hotels from '../Screens/HotelsScreen4/HotelsHome';
+import Hotels from '../Screens/HotelsScreen4/hotelsNavigator';
 import Profile from '../Screens/ProfileScreen5/ProfileHome';
 import PastTrips from '../Screens/PastTripsScreen2/PastTrips';
 import Route from '../Screens/RouteScreen3/RouteHome'

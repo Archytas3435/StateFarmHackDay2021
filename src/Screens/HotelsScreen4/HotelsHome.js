@@ -6,7 +6,7 @@ import Button from '../../CommonComponents/fullLengthButton';
 import Input from '../../CommonComponents/input';
 import UI from './hotelsUI';
 
-export default function HotelsHome() {
+export default function HotelsHome(props) {
   const[accessToken, setAccessToken] = useState()
       useEffect(() => {
         const URL =
@@ -40,7 +40,7 @@ export default function HotelsHome() {
       <View style={styling.vertContainer}>
         <Header title={'Find Hotels'} />
         <ScrollView>
-          <UI accessToken={accessToken}/>
+          <UI accessToken={accessToken} nav={props.nav}/>
         </ScrollView>
       </View>
     );
